@@ -14,12 +14,9 @@ Both are no-ops on non-Android platforms so the same code runs everywhere.
 ```js
 const wifiManager = require('bare-android-wifi-manager')
 
-// Android only: call once at app startup, before starting mDNS discovery.
-// Pass the JavaVM pointer and application Context from the bare-android runtime.
-// No-op on non-Android.
-wifiManager.init(bare_android.javaVM, bare_android.applicationContext)
-
 // Acquire the multicast lock so UDP multicast packets are delivered.
+// No-op on non-Android. The Android application context is obtained
+// automatically via ActivityThread.currentApplication().
 wifiManager.acquireMulticastLock('my-app-mdns')
 
 // Find the WiFi interface IP to pass to socket.addMembership.
@@ -37,7 +34,6 @@ wifiManager.releaseMulticastLock()
 const wifiManager = require('bare-android-wifi-manager')
 const { Discovery } = require('bare-mdns-discovery')
 
-wifiManager.init(bare_android.javaVM, bare_android.applicationContext)
 wifiManager.acquireMulticastLock('my-app-mdns')
 
 const discovery = new Discovery({ service: 'companion-link' })
@@ -46,12 +42,6 @@ const discovery = new Discovery({ service: 'companion-link' })
 ```
 
 ## API
-
-### `init(javaVM, applicationContext)`
-
-Android only. Call once before `acquireMulticastLock`. Stores the JavaVM pointer and Android `Context` needed for JNI calls. No-op on non-Android.
-
-> **Note:** The `javaVM` and `applicationContext` values depend on how `bare-android` exposes them — this API will stabilise once that is defined.
 
 ### `acquireMulticastLock([tag])`
 
