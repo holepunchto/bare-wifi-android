@@ -1,5 +1,5 @@
 {
-  "name": "bare-android-wifi-manager",
+  "name": "bare-wifi-android",
   "version": "0.1.0",
   "description": "Android WifiManager bindings for the Bare runtime — multicast lock and WiFi interface IP",
   "exports": {
@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/holepunchto/bare-android-wifi-manager.git"
+    "url": "git+https://github.com/holepunchto/bare-wifi-android.git"
   },
   "author": "Holepunch",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/holepunchto/bare-android-wifi-manager/issues"
+    "url": "https://github.com/holepunchto/bare-wifi-android/issues"
   },
-  "homepage": "https://github.com/holepunchto/bare-android-wifi-manager#readme",
+  "homepage": "https://github.com/holepunchto/bare-wifi-android#readme",
   "devDependencies": {
     "brittle": "^3.4.0",
     "cmake-android": "^1.0.0",

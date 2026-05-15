@@ -31,7 +31,7 @@ get_context (JNIEnv *env) {
 // Returns the IPv4 address of the active WiFi interface as a JS string, or null.
 // Works via getifaddrs on Android NDK 24+, macOS, and Linux.
 static js_value_t *
-bare_android_wifi_manager_get_wifi_ip (js_env_t *env, js_callback_info_t *info) {
+bare_wifi_android_get_wifi_ip (js_env_t *env, js_callback_info_t *info) {
   int err;
 
   struct ifaddrs *ifap;
@@ -81,7 +81,7 @@ bare_android_wifi_manager_get_wifi_ip (js_env_t *env, js_callback_info_t *info) 
 #ifdef __ANDROID__
 
 static js_value_t *
-bare_android_wifi_manager_acquire_multicast_lock (js_env_t *env, js_callback_info_t *info) {
+bare_wifi_android_acquire_multicast_lock (js_env_t *env, js_callback_info_t *info) {
   int err;
 
   size_t argc = 1;
@@ -123,7 +123,7 @@ bare_android_wifi_manager_acquire_multicast_lock (js_env_t *env, js_callback_inf
 }
 
 static js_value_t *
-bare_android_wifi_manager_release_multicast_lock (js_env_t *env, js_callback_info_t *info) {
+bare_wifi_android_release_multicast_lock (js_env_t *env, js_callback_info_t *info) {
   int err;
 
   if (!multicast_lock) {
@@ -153,7 +153,7 @@ bare_android_wifi_manager_release_multicast_lock (js_env_t *env, js_callback_inf
 #else
 
 static js_value_t *
-bare_android_wifi_manager_acquire_multicast_lock (js_env_t *env, js_callback_info_t *info) {
+bare_wifi_android_acquire_multicast_lock (js_env_t *env, js_callback_info_t *info) {
   int err;
   js_value_t *result;
   err = js_get_undefined(env, &result);
@@ -162,7 +162,7 @@ bare_android_wifi_manager_acquire_multicast_lock (js_env_t *env, js_callback_inf
 }
 
 static js_value_t *
-bare_android_wifi_manager_release_multicast_lock (js_env_t *env, js_callback_info_t *info) {
+bare_wifi_android_release_multicast_lock (js_env_t *env, js_callback_info_t *info) {
   int err;
   js_value_t *result;
   err = js_get_undefined(env, &result);
@@ -173,7 +173,7 @@ bare_android_wifi_manager_release_multicast_lock (js_env_t *env, js_callback_inf
 #endif
 
 static js_value_t *
-bare_android_wifi_manager_exports (js_env_t *env, js_value_t *exports) {
+bare_wifi_android_exports (js_env_t *env, js_value_t *exports) {
   int err;
 
 #define V(name, fn) \
@@ -185,12 +185,12 @@ bare_android_wifi_manager_exports (js_env_t *env, js_value_t *exports) {
     assert(err == 0); \
   }
 
-  V("acquireMulticastLock", bare_android_wifi_manager_acquire_multicast_lock)
-  V("releaseMulticastLock", bare_android_wifi_manager_release_multicast_lock)
-  V("getWifiIP", bare_android_wifi_manager_get_wifi_ip)
+  V("acquireMulticastLock", bare_wifi_android_acquire_multicast_lock)
+  V("releaseMulticastLock", bare_wifi_android_release_multicast_lock)
+  V("getWifiIP", bare_wifi_android_get_wifi_ip)
 #undef V
 
   return exports;
 }
 
-BARE_MODULE(bare_android_wifi_manager, bare_android_wifi_manager_exports)
+BARE_MODULE(bare_wifi_android, bare_wifi_android_exports)

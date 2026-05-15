@@ -1,4 +1,4 @@
-# bare-android-wifi-manager
+# bare-wifi-android
 
 Android `WifiManager` bindings for the [Bare](https://github.com/holepunchto/bare) runtime.
 
@@ -12,7 +12,7 @@ Both are no-ops on non-Android platforms so the same code runs everywhere.
 ## Usage
 
 ```js
-const wifiManager = require('bare-android-wifi-manager')
+const wifiManager = require('bare-wifi-android')
 
 // Acquire the multicast lock so UDP multicast packets are delivered.
 // No-op on non-Android. The Android application context is obtained
@@ -31,7 +31,7 @@ wifiManager.releaseMulticastLock()
 ### With `bare-mdns-discovery`
 
 ```js
-const wifiManager = require('bare-android-wifi-manager')
+const wifiManager = require('bare-wifi-android')
 const { Discovery } = require('bare-mdns-discovery')
 
 wifiManager.acquireMulticastLock('my-app-mdns')

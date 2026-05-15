@@ -7,23 +7,23 @@ if(ANDROID)
   find_package(cmake-android REQUIRED PATHS node_modules/cmake-android)
 endif()
 
-project(bare_android_wifi_manager C CXX)
+project(bare_wifi_android C CXX)
 
 if(ANDROID)
   fetch_package("github:holepunchto/libjnitl")
 endif()
 
-add_bare_module(bare_android_wifi_manager)
+add_bare_module(bare_wifi_android)
 
 target_sources(
-  ${bare_android_wifi_manager}
+  ${bare_wifi_android}
   PRIVATE
     binding.cc
 )
 
 if(ANDROID)
   target_link_libraries(
-    ${bare_android_wifi_manager}
+    ${bare_wifi_android}
     PRIVATE
       jnitl
       log
@@ -31,7 +31,7 @@ if(ANDROID)
 endif()
 
 set_target_properties(
-  ${bare_android_wifi_manager}
+  ${bare_wifi_android}
   PROPERTIES
   C_STANDARD 11
   CXX_STANDARD 20
