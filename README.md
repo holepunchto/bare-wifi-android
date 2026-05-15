@@ -5,9 +5,9 @@ Android `WifiManager` bindings for the [Bare](https://github.com/holepunchto/bar
 Provides two things needed for mDNS / multicast UDP to work on Android:
 
 1. **Multicast lock** — Android drops multicast packets by default to save battery. Acquiring a `WifiManager.MulticastLock` tells the OS to let them through.
-2. **WiFi interface IP** — `socket.addMembership` needs the local IP of the WiFi interface to join the right multicast group. This finds it via `getifaddrs`.
+2. **WiFi interface IP** — `socket.addMembership` needs the local IP of the WiFi interface to join the right multicast group. This finds it via `getifaddrs` on the `wlan0` interface.
 
-Both are no-ops on non-Android platforms so the same code runs everywhere.
+This is an Android-only native addon. Use an [import map](https://nodejs.org/api/packages.html#subpath-imports) to gate it to Android in cross-platform apps.
 
 ## Usage
 
@@ -53,18 +53,18 @@ Releases the currently held lock. No-op if no lock is held or on non-Android.
 
 ### `getWifiIP()`
 
-Returns the IPv4 address of the active WiFi interface (`wlan0`, `en0`, etc.) as a string, or `null` if none is found. Works on Android (NDK API 24+), macOS, and Linux.
+Returns the IPv4 address of the `wlan0` WiFi interface as a string, or `null` if not connected. Requires NDK API 24+.
 
 ## Building
 
 ```console
 npm i -g bare-make
-bare-make generate
+bare-make generate --platform android --arch arm64 -D ANDROID_PLATFORM=android-34 -D ANDROID_STL=c++_shared
 bare-make build
 bare-make install --link
 ```
 
-For Android cross-compilation, pass `--platform android --arch arm64` (or `ia32`/`x64`) to `bare-make generate`.
+Replace `arm64` with `arm`, `x64`, or `ia32` for other Android targets.
 
 ## License
 

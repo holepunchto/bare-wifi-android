@@ -20,14 +20,8 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            platform: linux
-            arch: x64
-          - os: macos-latest
-            platform: darwin
+            platform: android
             arch: arm64
-          - os: windows-latest
-            platform: win32
-            arch: x64
     runs-on: ${{ matrix.os }}
     name: Test / ${{ matrix.platform }}-${{ matrix.arch }}
     steps:
@@ -36,5 +30,4 @@ jobs:
         with:
           platform: ${{ matrix.platform }}
           arch: ${{ matrix.arch }}
-          flags: --debug
-      - run: npm test
+          flags: --debug -D ANDROID_PLATFORM=android-34 -D ANDROID_STL=c++_shared

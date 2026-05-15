@@ -1,17 +1,15 @@
 cmake_minimum_required(VERSION 4.0)
 
 find_package(cmake-bare REQUIRED PATHS node_modules/cmake-bare)
-
-if(ANDROID)
-  find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
-  find_package(cmake-android REQUIRED PATHS node_modules/cmake-android)
-endif()
+find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
+find_package(cmake-android REQUIRED PATHS node_modules/cmake-android)
 
 project(bare_wifi_android C CXX)
 
-if(ANDROID)
-  fetch_package("github:holepunchto/libjnitl")
-endif()
+use_java()
+
+fetch_package("github:holepunchto/libjstl")
+fetch_package("github:holepunchto/libjnitl")
 
 add_bare_module(bare_wifi_android)
 
@@ -21,14 +19,12 @@ target_sources(
     binding.cc
 )
 
-if(ANDROID)
-  target_link_libraries(
-    ${bare_wifi_android}
-    PRIVATE
-      jnitl
-      log
-  )
-endif()
+target_link_libraries(
+  ${bare_wifi_android}
+  PUBLIC
+    jstl
+    jnitl
+)
 
 set_target_properties(
   ${bare_wifi_android}
@@ -38,3 +34,10 @@ set_target_properties(
   CXX_SCAN_FOR_MODULES OFF
   POSITION_INDEPENDENT_CODE ON
 )
+
+find_android_jar(android_jar)
+
+set(CMAKE_JAVA_COMPILE_FLAGS --release 17)
+
+bare_target(target)
+bare_module_target("." _module NAME _name)

@@ -8,7 +8,7 @@
   },
   "files": [
     "index.js",
-    "binding.c",
+    "binding.cc",
     "binding.js",
     "CMakeLists.txt",
     "prebuilds"
@@ -31,9 +31,10 @@
   "homepage": "https://github.com/holepunchto/bare-wifi-android#readme",
   "devDependencies": {
     "brittle": "^3.4.0",
-    "cmake-android": "^1.0.0",
-    "cmake-bare": "^1.1.2",
-    "cmake-fetch": "^2.0.0",
+    "cmake-android": "^0.1.4",
+    "cmake-bare": "^1.8.0",
+    "cmake-fetch": "^1.5.1",
+    "cmake-java": "^0.1.2",
     "lunte": "^1.3.0",
     "prettier": "^3.3.3",
     "prettier-config-holepunch": "^2.0.0"
