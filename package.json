@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Drache93/bare-wifi-android.git"
+    "url": "git+https://github.com/holepunchto/bare-wifi-android.git"
   },
-  "author": "Drache93",
+  "author": "Holepunch",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Drache93/bare-wifi-android/issues"
+    "url": "https://github.com/holepunchto/bare-wifi-android/issues"
   },
-  "homepage": "https://github.com/Drache93/bare-wifi-android#readme",
+  "homepage": "https://github.com/holepunchto/bare-wifi-android#readme",
   "devDependencies": {
     "brittle": "^3.4.0",
     "cmake-android": "^0.1.4",
