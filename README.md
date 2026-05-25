@@ -1,5 +1,7 @@
 # bare-wifi-android
 
+> ⚠️ **Experimental** Claude generated prototype
+
 Android `WifiManager` bindings for the [Bare](https://github.com/holepunchto/bare) runtime.
 
 Provides two things needed for mDNS / multicast UDP to work on Android:
